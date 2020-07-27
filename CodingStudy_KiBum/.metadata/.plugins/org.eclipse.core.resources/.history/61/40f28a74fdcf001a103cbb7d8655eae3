@@ -1,0 +1,55 @@
+package DynamicProgramming;
+
+import java.util.ArrayList;
+
+public class GoSchool{
+	private static boolean check(int []arr,int [][]array) {
+		System.out.println(arr);
+		for(int i=0;i<array.length;i++) {
+			if(array[i].equals(arr))return true;
+			
+		}
+		return false;
+	}
+	public static int solution(int m, int n, int[][]puddles) {
+		ArrayList<int []> puddle=new ArrayList<int []>();
+		for(int i[]:puddles) {
+			puddle.add(i);
+		}
+		int a[]= {2,2};
+		System.out.println(check(a,puddles));
+		
+		int sum[][]=new int[n+1][m+1];
+//		for(int i=1;i<=n;i++) {
+//			for(int j=1;j<=m;j++) {
+//				int temp[]= {i,j};
+//				if(i==1||j==1) {
+//					if(!check(temp,puddle)) sum[i][j]=1;						
+//				}
+//				else {
+//					if(!check(temp,puddle)) {
+//						sum[i][j]=sum[i-1][j]+sum[i][j-1];
+//					}
+//					else { sum[i][j]=0;
+//					System.out.println("Checking");
+//					
+//					}
+//				}
+//				
+//			}
+//		}
+		for(int i=1;i<=n;i++) {
+			for(int j=1;j<=m;j++) {
+				System.out.print(sum[i][j]+" ");
+			}
+			System.out.println();
+		}
+		return sum[n][m];
+		
+	}
+	public static void main(String args[]) {
+		int a[][]= {{2,2}};
+		System.out.println(solution(4,3,a));
+	}
+	
+}

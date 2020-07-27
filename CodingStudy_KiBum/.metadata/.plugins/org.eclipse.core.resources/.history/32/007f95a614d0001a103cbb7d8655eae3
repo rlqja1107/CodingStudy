@@ -1,0 +1,55 @@
+package BFS_DFS;
+
+import java.util.ArrayList;
+
+public class ChangeWords {
+	static int answer=0;
+	static String target_word;
+	static int answer_final;
+	public static void count(String begin,String []words) {
+		int count;
+		answer++;
+		if(words.length==0) {
+			answer_final=0;
+			return;
+		}
+		ArrayList<String> wordArray=new ArrayList<String>();
+		for(String word: words) {
+			count=0;
+			if(word.equals(""))
+				continue;
+			for(int i=0;i<begin.length();i++) {
+				if(word.charAt(i)==begin.charAt(i))continue;
+				count++;		
+			}
+			//하나만 다른얘를 넣음
+			if(count==1)
+				wordArray.add(word);
+		}
+		if(wordArray.contains(target_word)) {
+			answer_final=answer;
+			return;
+		}
+		for(String i:wordArray) {
+			for(int j=0;j<words.length;j++) {
+				if(words[j].equals(i)) {
+					words[j]="";
+					break;
+				}
+			}
+			count(i,words);
+		}
+
+	}
+	public static int solution(String begin,String target,String[] words) {
+		target_word=target;
+		count(begin,words);
+		return answer_final;
+	}
+
+	public static void main(String[] args) {	
+		String a[]= {"hot","dot","dog","lot","log","cog"};
+		System.out.println(solution("hit","cog",a));
+	}
+
+}
