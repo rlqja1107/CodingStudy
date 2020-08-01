@@ -1,4 +1,4 @@
-package CodingStudy_sh.dfs_bfs;
+package dfs_bfs;
 
 public class word_conversion {
 	static String[]words= new String[]{"hot", "dot", "dog", "lot", "log", "cog"};
@@ -45,11 +45,11 @@ public class word_conversion {
 	public static int solution(String begin, String target, String[]words) {
 		visited=new int[words.length];
 		for(String word:words) {
-			if(word.equals(target)) 
-				dfs(visited,begin,target,words,0);
-			else answer=0;
+			if(!word.equals(target)) 
+				answer=0;
 		} 
-		
+		dfs(visited,begin,target,words,0);
+
 		return answer;
 		
 	}
