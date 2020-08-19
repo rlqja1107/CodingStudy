@@ -8,6 +8,7 @@ public class gymSuit {
 	public static int solution(int n, int[] lost, int[] reserve) {
 		int answer = 0;
 		int students[] = new int[n];
+		int r = 0;
 
 		for (int i = 0; i < students.length; i++)
 			students[i] = 1;
@@ -20,13 +21,24 @@ public class gymSuit {
 
 		for (int i = 0; i < students.length; i++) {
 			if (students[i] == 0) {
-				if (students[i - 1] > 1) {
-					students[i]++;
-					students[i - 1]--;
-				}
-				if (students[i + 1] > 1) {
-					students[i]++;
-					students[i + 1]--;
+				if (i == 0) {
+					if (students[i + 1] >= 2) {
+						students[i]++;
+						students[i + 1]--;
+					}
+				} else if (i == students.length - 1) {
+					if (students[i - 1] >= 2) {
+						students[i]++;
+						students[i - 1]--;
+					}
+				} else {
+					if (students[i + 1] >= 2) {
+						students[i]++;
+						students[i + 1]--;
+					} else if (students[i - 1] >= 2) {
+						students[i]++;
+						students[i - 1]--;
+					}
 				}
 			}
 		}
