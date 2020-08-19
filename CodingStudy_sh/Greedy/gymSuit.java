@@ -8,7 +8,7 @@ public class gymSuit {
 	public static int solution(int n, int[] lost, int[] reserve) {
 		int answer = 0;
 		int students[] = new int[n];
-		int r = 0;
+		
 
 		for (int i = 0; i < students.length; i++)
 			students[i] = 1;
