@@ -1,0 +1,10 @@
+package BFS_DFS;
+
+public class TravelPath {
+
+	public static void main(String[] args) {
+		System.out.println("AAA".compareTo("ABC"));
+
+	}
+
+}

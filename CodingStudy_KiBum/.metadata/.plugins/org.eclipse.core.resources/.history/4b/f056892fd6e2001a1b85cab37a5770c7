@@ -1,0 +1,22 @@
+package Sort;
+
+import java.util.Arrays;
+
+public class HIndex {
+	public static int solution(int []citations) {
+		Arrays.sort(citations);
+		System.out.println(citations.length);
+		for(int i=citations.length-1;i>=0;i--){
+			if(citations[i]<=(citations.length-i)) {
+				return citations[i];
+			}
+		}
+		return 0;
+	}
+	public static void main(String[] args) {
+		int []problem= {3,0,6,1,5};
+		System.out.println(solution(problem));
+
+	}
+
+}
