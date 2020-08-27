@@ -10,12 +10,6 @@ public class ranking {
 
 		int[][] playlist = new int[n][n];
 
-		for (int i = 0; i < playlist.length; i++) {
-			for (int j = 0; j < playlist.length; j++) {
-				playlist[i][j] = 0;
-			}
-		}
-
 		for (int i = 0; i < results.length; i++) {
 			playlist[results[i][0] - 1][results[i][1] - 1] = 1;
 			playlist[results[i][1] - 1][results[i][0] - 1] = -1;
