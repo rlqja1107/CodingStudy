@@ -1,0 +1,33 @@
+package BinarySearch;
+
+import java.util.*;
+public class Immigration_revised {
+	public static long solution(int n,int times[]) {
+		Arrays.sort(times);
+		long high=n*(times[times.length-1]);
+		long low=0;
+		long mid=0;
+		while(high>low){
+			mid=(high+low)/2;
+			int man_max_number=0;
+			for(int i=0;i<times.length;i++){
+				man_max_number+=(int)(mid/times[i]);
+			}
+			if(man_max_number>n) {
+				high=mid;
+			}
+			else{
+				low=mid+1;
+			}
+		}
+		return mid;
+
+	}
+	public static void main(String[] args) {
+		int n=6;
+		int time[]= {7,10};
+		System.out.println(solution(n,time));
+
+	}
+
+}
