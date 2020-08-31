@@ -1,7 +1,7 @@
 package Graph;
 import java.util.*;
 public class Ranking {
-	//set�� standard�� ��ϵ��� �־��ֱ�
+	//set에 standard의 지는 목록들을 넣어주기
 	public static void put_loose_ranking(HashMap<Integer,Set<Double>> map,int standard,Set<Double>set,int compare) {
 		Set<Double>sub_set=map.get(standard);
 		for(Double val:sub_set){
@@ -15,6 +15,7 @@ public class Ranking {
 
 		}
 	}
+	//set에 standard의 이기는 목록 넣어주기
 	public static void put_win_ranking(HashMap<Integer,Set<Double>> map,int standard,Set<Double>set,int compare) {
 		Set<Double>sub_set=map.get(standard);
 		for(Double val:sub_set) {
@@ -27,7 +28,8 @@ public class Ranking {
 			}
 
 		}}
-	//�̱�� int[1] �ڸ��� 1,���� int[1]�ڸ��� 0, int[0]���� ��(����)
+	//이기면 원래의 node 값에 0.1을 더하여 진 노드의 값을 Set에 넣고,
+	//지면 원래의 node 값에 0.1을 빼서 이긴 노드의 값을 Set에 넣어 진 노드인지 이긴 노드인지 구분
 	public static int solution(int n, int results[][]) {
 		HashMap<Integer,Set<Double>> graph=new HashMap<Integer,Set<Double>>();
 		for(int i=1;i<=n;i++) {
@@ -42,10 +44,11 @@ public class Ranking {
 			Set<Double> list2=new HashSet<Double>();
 			for(double val:list){
 				double value=Math.round(val);
-				//����Ǿ��ִ� ������� ������� �־��ֱ�,
+				//0보다 크다는 것은 이 노드가 졌다는 것을 의미
 				if(val-value>0) {
 					put_loose_ranking(graph,(int)value,list2,i);
 				}
+				//0보다 작다는 것은 이 노드가 이겼다는 것을 의미
 				else {
 					put_win_ranking(graph,(int)value,list2,i);
 				}
@@ -54,10 +57,11 @@ public class Ranking {
 		}
 
 		int answer=0;
+		//전체 노드의 갯수와 비교한 정보가 Set에 들어있으면 answer++
 		for(int i=1;i<=n;i++) {
 			if(graph.get(i).size()>=n-1)
 				answer++;
-			System.out.println(i+","+Arrays.deepToString(graph.get(i).toArray()));
+		
 		}
 
 		return answer;
