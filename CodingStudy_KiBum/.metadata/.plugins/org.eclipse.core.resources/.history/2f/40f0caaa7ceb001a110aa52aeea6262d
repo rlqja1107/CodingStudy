@@ -1,0 +1,72 @@
+package Graph;
+import java.util.*;
+public class Ranking {
+	//set에 standard의 목록들을 넣어주기
+	public static void put_loose_ranking(HashMap<Integer,Set<int[]>> map,int standard,Set<int[]>set) {
+		Set<int[]>sub_set=map.get(standard);
+		for(int []val:sub_set){
+			if(val[1]==1) {
+				int temp[]= {val[0],1};
+				set.add(temp);
+				put_loose_ranking(map,val[0],set);
+			}
+			
+		}
+	}
+	public static void put_win_ranking(HashMap<Integer,Set<int[]>> map,int standard,Set<int[]>set) {
+		Set<int[]>sub_set=map.get(standard);
+		for(int []val:sub_set) {
+			if(val[1]==0){
+				int temp[]= {val[0],0};
+				set.add(temp);
+				put_win_ranking(map,val[0],set);
+			}
+		}
+		
+	}
+	//이기면 int[1] 자리에 1,지면 int[1]자리에 0, int[0]에는 값(숫자)
+	public static int solution(int n, int results[][]) {
+		HashMap<Integer,Set<int[]>> graph=new HashMap<Integer,Set<int[]>>();
+		for(int i=1;i<=n;i++) {
+			graph.put(i,new HashSet<int[]>());
+		}
+		for(int []val:results) {
+			int temp[]= {val[1],1};
+			graph.get(val[0]).add(temp);
+			int temp2[]= {val[0],0};
+			graph.get(val[1]).add(temp2);
+		}
+//		for(int i=1;i<n;i++){
+//			Set<int[]> list=graph.get(i);
+//			try {
+//			for(int []val:list){
+//				//연결되어있는 얘들한톄 진얘들을 넣어주기,
+//				if(val[1]==1) {
+//					put_loose_ranking(graph,val[0],list);
+//				}
+//				else {
+//					put_win_ranking(graph,val[0],list);
+//				}
+//			}
+//			}
+//			catch(Exception e) {
+//				
+//			}
+//		}
+		int answer=0;
+		for(int i=1;i<=n;i++) {
+			if(graph.get(i).size()==n-1)
+				answer++;
+			System.out.println(i+","+graph.get(i).size());
+		}
+		
+		return answer;
+		
+	}
+	public static void main(String[] args) {
+		int n=5;
+		int results[][]= {{4, 3}, {4, 2}, {3, 2}, {1, 2}, {2, 5}};
+		System.out.println(solution(5,results));
+	}
+
+}
